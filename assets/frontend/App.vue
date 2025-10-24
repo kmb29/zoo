@@ -41,11 +41,19 @@ async function addAnimal(eid, s) {
     const data = await res.json()
     if (data.error) {
         alert(data.error)
-    } else {
-        const enc = cells.value.find(e => e.id === eid)
-        enc.animals.push(data)
+        return
     }
+    const enc = cells.value.find(e => e.id === eid || e.id === Number(eid))
+    if (!enc) {
+        await loadZoo()
+        return
+    }
+    if (!Array.isArray(enc.animals)) {
+        enc.animals = []
+    }
+    enc.animals.push(data)
 }
+
 
 
 async function feedAnimal(id) {
