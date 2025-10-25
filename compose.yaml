@@ -8,7 +8,11 @@ services:
     container_name: zoo-php
     restart: unless-stopped
     volumes:
-      - .:/var/www/html
+      - ./src:/var/www/html/src
+      - ./config:/var/www/html/config
+      - ./templates:/var/www/html/templates
+      - ./assets:/var/www/html/assets
+      - ./public:/var/www/html/public
     environment:
       - DATABASE_URL=mysql://symfony:symfony@db:3306/zoo?serverVersion=8&charset=utf8mb4
     depends_on:
